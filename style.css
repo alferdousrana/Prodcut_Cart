@@ -1,0 +1,174 @@
+/* Ensure product cards have the same height */
+
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+   
+}
+
+.product-card {
+    margin-bottom: 30px;
+    height: 100%;
+}
+
+/* Make all product images the same size */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+
+/* Adjust product grid for responsiveness */
+#productGrid {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product-card {
+    /* Adjust grid columns for different screen sizes */
+    width: 100%; /* Mobile screen */
+}
+
+@media (min-width: 576px) {
+    .product-card {
+        width: 50%; /* Tablet screen: 2 columns */
+    }
+}
+
+@media (min-width: 992px) {
+    .product-card {
+        width: 25%; /* Desktop screen: 4 columns */
+    }
+}
+
+/* Custom Styles for the Cart Sidebar */
+#cartSidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 0;  /* Initially hidden */
+    background-color: #333;
+    color: white;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    z-index: 1;
+}
+/* Mobile screen: Cart Sidebar width is 50% */
+@media (max-width: 576px) {
+    #cartSidebar {
+        width: 50%;  /* 50% width on mobile */
+    }
+}
+
+/* Close Button for Cart Sidebar */
+.cart-close-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Cart Item Styles */
+.cart-item {
+    display: flex;
+    flex-direction: row;  /* Stack content vertically */
+    align-items: flex-start;
+    border-bottom: gray solid 1px;
+    margin-bottom: 10px;
+    margin-left: -20px;
+    
+}
+
+.cart-item img {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.cart-item-details {
+    display: flex;
+    flex-direction: column; 
+    margin-left: 10px;
+    margin-bottom: 10px;  /* Add margin below the details */
+}
+
+.cart-item-details .product-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.cart-item-details .product-price {
+    color: #f8b400;
+    font-weight: bold;
+}
+
+/* Modify cart item actions */
+.cart-item-actions {
+    display: flex;
+    flex-direction: row;  /* Stack quantity and remove button vertically */
+    align-items: center;  
+    max-width: fit-content;
+}
+
+
+/* Style for the buttons in cart item actions */
+.cart-item-actions button {
+    margin-top: 10px;
+    margin-right: 15px;  /* Adjust vertical spacing */
+    padding: 3px 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    width: 100%;  /* Make buttons full-width */
+}
+.cart-item-actions span {
+    margin-right: 15px;
+    margin-top: 10px;
+}
+
+/* Remove button style */
+.cart-item-actions .remove-btn {
+    margin-left: 5px;
+    background-color: #dc3545;
+}
+
+/* Cart Toggle Button */
+.cart-toggle {
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50%;
+}
+
+/* Checkout Button */
+#cartSidebar .btn-primary {
+    width: 100%;
+}
+
+/* Navbar Styling */
+.navbar {
+    margin-bottom: 20px;
+}
+
+/* Cart Sidebar Animation */
+#cartSidebar {
+    width: 0;
+    transition: 0.5s;
+}
+
+.cart-content {
+    padding: 20px;
+}
