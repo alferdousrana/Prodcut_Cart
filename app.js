@@ -145,6 +145,7 @@ function changeQuantity(productId, action) {
 
     updateCart();
     updateCartBadge();
+    
   }
 }
 
@@ -171,7 +172,10 @@ function closeCart() {
   cartSidebar.style.width = "0";
 }
 
-// Checkout function
-function checkout() {
-  alert(`Proceeding to checkout with total $${total.toFixed(2)}`);
-}
+  function checkout() {
+    if (cart.length === 0) {
+      alert("Your cart is empty. Add items before checking out.");
+      return;
+    }
+    alert(`Proceeding to checkout with total $${total.toFixed(2)}`);
+  }
