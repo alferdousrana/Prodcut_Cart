@@ -172,3 +172,23 @@
 .cart-content {
     padding: 20px;
 }
+
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    text-align: center;
+    padding: 6px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    opacity: 0;
+    transition: opacity 0.5s, visibility 0.5s ease-in-out;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}

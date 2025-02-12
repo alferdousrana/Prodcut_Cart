@@ -12,29 +12,31 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Rshop</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-5 ms-auto">
-                <li class="nav-item">
-                    <!-- Cart Icon to Toggle Cart Sidebar -->
-                    <button class="btn btn-outline-primary position-relative" onclick="toggleCart()">
-                        <i class="bi bi-cart-fill"></i>
-                        <span id="cartBadge" class="badge bg-danger position-absolute top-0 start-100 translate-middle badge-pill">
-                            0
-                        </span>
-                    </button>
-                </li>
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Rshop</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-5 ms-auto">
+                    <li class="nav-item">
+                        <!-- Cart Icon to Toggle Cart Sidebar -->
+                        <button class="btn btn-outline-primary position-relative" onclick="toggleCart()">
+                            <i class="bi bi-cart-fill"></i>
+                            <span id="cartBadge"
+                                class="badge bg-danger position-absolute top-0 start-100 translate-middle badge-pill">
+                                0
+                            </span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
-    
+    </nav>
+
 
     <div class="container mt-4" style="margin-top: 10px;">
         <!-- Header Section -->
@@ -62,7 +64,7 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                   
+
                 </div>
                 <div class="col-6">
                     <div>Vat(10%): $ <span id="vat">0</span></div>
@@ -70,7 +72,7 @@
             </div>
             <div class="row">
                 <div class="col-6">
-            
+
                 </div>
                 <div class="col-6">
                     <div>Total: $ <span id="total">0</span></div>
@@ -80,6 +82,14 @@
             <button class="btn btn-primary mt-4" id="checkoutButton" onclick="checkout()">Checkout</button>
         </div>
     </div>
+<div id="toast" class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+        <div class="toast-body">
+            Product Added to the Cart!
+        </div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
 
     <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

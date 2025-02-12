@@ -66,6 +66,7 @@ function addToCart(productId, productTitle, productPrice, productImage) {
 
   updateCart();
   updateCartBadge(); // Update the cart badge after adding the item
+  showToast();
 }
 
 // Update cart display
@@ -179,3 +180,15 @@ function closeCart() {
     }
     alert(`Proceeding to checkout with total $${total.toFixed(2)}`);
   }
+
+function showToast() {
+  var toast = document.getElementById("toast");
+
+  // Ensure the toast is visible by adding the 'show' class
+  toast.classList.add("show");
+
+  // Optionally, make it disappear after 3 seconds
+  setTimeout(function () {
+    toast.classList.remove("show"); // Remove 'show' class to hide the toast
+  }, 3000);
+}
