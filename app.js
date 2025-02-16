@@ -4,6 +4,12 @@ let subtotal = 0;
 let itemCount = 0;
 let vat = 0;
 let total = 0;
+let discount = 0;
+
+const validPromoCodes = {
+  ostad10: 0.1,
+  ostad5: 0.05,
+};
 
 let url = "https://fakestoreapi.com/products"; //data.forEach()
 
@@ -69,6 +75,23 @@ function addToCart(productId, productTitle, productPrice, productImage) {
   showToast();
 }
 
+function applyPromoCode() {
+  const promoInput = document.getElementById("promoCodeInput").value.trim();
+  const promoMessage = document.getElementById("promoMessage");
+
+  if (validPromoCodes.hasOwnProperty(promoInput)) {
+    discount = subtotal * validPromoCodes[promoInput];
+    promoMessage.textContent = "Promo applied successfully!";
+    promoMessage.style.color = "green";
+  } else {
+    discount = 0;
+    promoMessage.textContent = "Your promo code is incorrect.";
+    promoMessage.style.color = "red";
+  }
+
+  updateCart();
+}
+
 // Update cart display
 function updateCart() {
   const cartItemsList = document.getElementById("cartItems");
@@ -76,53 +99,72 @@ function updateCart() {
   const itemCountDisplay = document.getElementById("itemCount");
   const vatDisplay = document.getElementById("vat");
   const totalPrice = document.getElementById("total");
+  const discountDisplay = document.getElementById("discount");
+  
   cartItemsList.innerHTML = "";
-
   subtotal = 0;
   itemCount = 0;
-  vat = 0;
-  total = 0;
 
   cart.forEach((item) => {
     subtotal += item.price * item.quantity;
     itemCount += item.quantity;
     cartItemsList.innerHTML += `
-            <div class="cart-item">
-                <img src="${item.image}" alt="${item.title}">
-                <div class="cart-item-details">
-                    <div class="product-name">${item.title}</div>
-                    <div class="product-price">Tk ${item.price.toFixed(
-                      2
-                    )}</div> 
-                    
-                    <div class="cart-item-actions">
-                    <button onclick="changeQuantity(${
-                      item.id
-                    }, 'decrease')">−</button>
-                    <span>${item.quantity}</span>
-                    <button onclick="changeQuantity(${
-                      item.id
-                    }, 'increase')">+</button>
-                    <button class="remove-btn" onclick="removeFromCart(${
-                      item.id
-                    })">Remove</button>
-                    </div>
-                </div>    
-            </div>
-        `;
+      <div class="cart-item">
+        <img src="${item.image}" alt="${item.title}">
+        <div class="cart-item-details">
+          <div class="product-name">${item.title}</div>
+          <div class="product-price">$${item.price.toFixed(2)}</div> 
+          <div class="cart-item-actions">
+            <button onclick="changeQuantity(${item.id}, 'decrease')">−</button>
+            <span>${item.quantity}</span>
+            <button onclick="changeQuantity(${item.id}, 'increase')">+</button>
+            <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+          </div>
+        </div>    
+      </div>
+    `;
   });
 
-  vat = subtotal * 0.1; // VAT = 10% of subtotal
+  vat = subtotal * 0.1;
+  total = subtotal + vat - discount;
 
-  // Calculate total price
-  total = subtotal + vat;
-
-  // Update the UI with the calculated values
   subtotalPrice.textContent = subtotal.toFixed(2);
   vatDisplay.textContent = vat.toFixed(2);
+  discountDisplay.textContent = discount.toFixed(2);
   totalPrice.textContent = total.toFixed(2);
   itemCountDisplay.textContent = itemCount;
 }
+
+// HTML changes for promo input
+const promoSection = `
+  <div class="row mt-2">
+    <div class="col-6">
+      <input type="text" id="promoCodeInput" class="form-control" placeholder="Enter promo code">
+    </div>
+    <div class="col-6">
+      <button class="btn btn-success" onclick="applyPromoCode()">Apply</button>
+    </div>
+    <div class="col-12">
+      <p id="promoMessage" style="margin-top: 5px;"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <div>Discount: $ <span id="discount">0</span></div>
+    </div>
+  </div>
+  <!-- Checkout Button Below Promo Section -->
+  <div class="row mt-4">
+    <div class="col-12">
+      <button class="btn btn-primary w-100" id="checkoutButton" onclick="checkout()">Checkout</button>
+    </div>
+  </div>
+`;
+
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelector("#cartSidebar .cart-content").insertAdjacentHTML("beforeend", promoSection);
+});
+
 
 // Update the cart badge with the subtotal items count
 function updateCartBadge() {
@@ -187,8 +229,7 @@ function showToast() {
   // Ensure the toast is visible by adding the 'show' class
   toast.classList.add("show");
 
-  // Optionally, make it disappear after 3 seconds
   setTimeout(function () {
-    toast.classList.remove("show"); // Remove 'show' class to hide the toast
+    toast.classList.remove("show"); 
   }, 3000);
 }
